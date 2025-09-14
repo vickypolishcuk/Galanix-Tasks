@@ -22,8 +22,14 @@ h1 {
   border-radius: 50%;
   object-fit: cover;
   border: solid rgb(76, 76, 76) 5px;
+  transition: 0.5s ease;
 }
 
 .gallery img.red-border {
     border: solid red 5px;
+}
+
+.gallery img:hover {
+    border: solid yellow 5px;
+    transform: rotate(45deg)
 }
