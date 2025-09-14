@@ -1,0 +1,29 @@
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+h1 {
+    text-align: center;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(3, auto);
+  gap: 15px;
+  max-width: 80%;
+  margin: 0 auto;
+}
+
+.gallery img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: 50%;
+  object-fit: cover;
+  border: solid rgb(76, 76, 76) 5px;
+}
+
+.gallery img.red-border {
+    border: solid red 5px;
+}
