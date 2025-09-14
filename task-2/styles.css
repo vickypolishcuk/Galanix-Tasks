@@ -7,6 +7,12 @@ h1 {
     text-align: center;
 }
 
+.basic-info {
+    width: 80%;
+    text-align: left;
+    margin: 0 auto;
+}
+
 .gallery {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -23,12 +29,10 @@ h1 {
   object-fit: cover;
   border: solid rgb(76, 76, 76) 5px;
   transition: 0.5s ease;
+  cursor: pointer;
 }
 
 @media (min-width: 900px) {
-  .gallery {
-    grid-template-columns: repeat(4, 1fr);
-  }
   .gallery img:nth-child(4n+1) {
     border-color: red;
   }
