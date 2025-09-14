@@ -11,4 +11,11 @@ function getFormattedDate() {
   return `${day}.${month}.${year} ${hours}:${minutes}`;
 }
 
-document.querySelector('.data').textContent = getFormattedDate();
+function getNumberOfImg() {
+    return (document.querySelectorAll('img')).length;
+}
+
+
+
+document.querySelector('.data').textContent = `Date: ${getFormattedDate()}`;
+document.querySelector('.number').textContent = `Number of images: ${getNumberOfImg()}`;

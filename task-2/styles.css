@@ -9,8 +9,11 @@ h1 {
 
 .basic-info {
     width: 80%;
-    text-align: left;
     margin: 0 auto;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    align-items: center;
 }
 
 .gallery {
