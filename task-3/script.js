@@ -32,6 +32,7 @@ form.addEventListener("submit", async (e) => {
             <th>Назва університету</th>
             <th>Сайт</th>
             <th>Домен</th>
+            <th>Зберегти в мій список</th>
           </tr>
         </thead>
         <tbody>
@@ -45,12 +46,25 @@ form.addEventListener("submit", async (e) => {
           <td>${u.name}</td>
           <td><a href="${u.web_pages[0]}" target="_blank">${u.web_pages[0]}</a></td>
           <td>${u.domains.join(", ")}</td>
+          <td><input type="checkbox" class="row-checkbox"></td>
         </tr>
       `;
     });
 
     table += "</tbody></table>";
-    resultsDiv.innerHTML = table;
+    resultsDiv.innerHTML = table; // виведення таблиці
+
+    // Оновлення кількості обраних даних
+    const checkboxes = document.querySelectorAll(".row-checkbox");
+    const count = document.getElementById("selection-count");
+
+    function updateCount() {
+      const selected = Array.from(checkboxes).filter(cb => cb.checked).length;
+      count.textContent = `Вибрано: ${selected}`;
+    }
+
+    checkboxes.forEach(cb => cb.addEventListener("change", updateCount));
+  
   } catch (err) {
     resultsDiv.innerHTML = "<p>Помилка при отриманні даних</p>";
   }
@@ -60,4 +74,5 @@ form.addEventListener("submit", async (e) => {
 resetBtn.addEventListener("click", () => {
   input.value = "";
   resultsDiv.innerHTML = "";
+  document.getElementById("selection-count").textContent = "";
 });

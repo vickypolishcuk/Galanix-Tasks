@@ -54,6 +54,12 @@ button:active {
     transform: translateY(2px);
 }
 
+#selection-count {
+    text-align: right;
+    margin-top: 10px;
+    margin-right: 10%;
+}
+
 table {
     margin: 20px auto;
     border-collapse: collapse;
@@ -70,4 +76,5 @@ th, td {
 
 th {
     background: rgb(232, 232, 232);
+    text-align: center;
 }
