@@ -14,32 +14,34 @@ function getFormattedDate() {
 
 // Функція отримання кількості картинок на сторінці
 function getNumberOfImg() {
-  return (document.querySelectorAll('img')).length - 1;
+  return containers.length - removedImages.length;
 }
 
-// Виведення інформації на сторінку
-document.querySelector('.data').textContent = `Date: ${getFormattedDate()}`;
-document.querySelector('.number').textContent = `Number of images: ${getNumberOfImg()}`;
+// Функція оновлення інформації
+function updateUI() {
+  document.querySelector('.data').textContent = `Date: ${getFormattedDate()}`;
+  document.querySelector('.number').textContent = `Number of images: ${getNumberOfImg()}`;
 
-// Змінні для відображення модального вікна й картинки
-const galleryImages = document.querySelectorAll('.gallery img');
-const modal = document.getElementById('modal');
-const modalImg = document.getElementById('modal-img');
-const closeBtn = document.querySelector('.close');
+  containers.forEach(c => c.classList.remove('first')); // видалення попередній класів
 
-// Обробники для кожної картинки
-galleryImages.forEach(img => {
-  img.addEventListener('click', () => {
-    modal.style.display = 'block'; // відображаємо модалку
-    modalImg.src = img.src; // відображаємо обрану картинку
+  // Визначення кількості колонок
+  let columns = 4;
+  if (window.innerWidth <= 500) {
+    columns = 1;
+  } else if (window.innerWidth <= 900) {
+    columns = 2;
+  }
+
+  // Визначення перших картинок у рядку
+  const visibleContainers = Array.from(containers).filter(c => c.style.display !== "none");
+  visibleContainers.forEach((c, index) => {
+    if (index % columns === 0) {
+      c.classList.add('first'); // додавання до них класу
+    }
   });
-});
+}
 
-// Обробник для закриття картинки
-closeBtn.addEventListener('click', () => {
-  modal.style.display = 'none'; // не відображаємо модалку
-});
-
+window.addEventListener('resize', updateUI);
 
 // Локальне сховище видалених картинок
 let removedImages = JSON.parse(localStorage.getItem("removedImages")) || [];
@@ -60,6 +62,7 @@ containers.forEach(container => {
     if (!removedImages.includes(src)) {
       removedImages.push(src);
       localStorage.setItem("removedImages", JSON.stringify(removedImages));
+      updateUI();
     }
   });
 });
@@ -72,4 +75,27 @@ document.getElementById("restore").addEventListener("click", () => {
   containers.forEach(container => {
     container.style.display = "inline-block";
   });
+  updateUI();
+});
+
+updateUI();
+
+
+// Змінні для відображення модального вікна й картинки
+const galleryImages = document.querySelectorAll('.gallery img');
+const modal = document.getElementById('modal');
+const modalImg = document.getElementById('modal-img');
+const closeBtn = document.querySelector('.close');
+
+// Обробники для кожної картинки
+galleryImages.forEach(img => {
+  img.addEventListener('click', () => {
+    modal.style.display = 'block'; // відображаємо модалку
+    modalImg.src = img.src; // відображаємо обрану картинку
+  });
+});
+
+// Обробник для закриття картинки
+closeBtn.addEventListener('click', () => {
+  modal.style.display = 'none'; // не відображаємо модалку
 });

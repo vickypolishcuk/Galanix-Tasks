@@ -39,6 +39,11 @@ h1 {
     position: relative;
 }
 
+/* Червоний бордер для першої в рядку картинки */
+.img-container.first img {
+    border-color: red;
+}
+
 /* Кнопка видалення */
 .remove {
     position: absolute;
@@ -87,20 +92,10 @@ h1 {
     transform: translateY(2px);
 }
 
-/* Стилі для великих екранів */
-@media (min-width: 900px) {
-    .img-container:nth-child(4n+1) img {
-        border-color: red;
-    }
-}
-
 /* Стилі для середніх екранів */
 @media (max-width: 900px) {
     .gallery {
         grid-template-columns: repeat(2, 1fr);
-    }
-    .img-container:nth-child(2n+1) img {
-        border-color: red;
     }
 }
 
@@ -108,9 +103,6 @@ h1 {
 @media (max-width: 500px) {
     .gallery {
         grid-template-columns: 1fr;
-    }
-    .img-container:nth-child(1n+1) img {
-        border-color: red;
     }
 }
 
