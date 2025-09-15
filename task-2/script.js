@@ -14,7 +14,7 @@ function getFormattedDate() {
 
 // Функція отримання кількості картинок на сторінці
 function getNumberOfImg() {
-  return (document.querySelectorAll('img')).length;
+  return (document.querySelectorAll('img')).length - 1;
 }
 
 // Виведення інформації на сторінку
@@ -38,4 +38,38 @@ galleryImages.forEach(img => {
 // Обробник для закриття картинки
 closeBtn.addEventListener('click', () => {
   modal.style.display = 'none'; // не відображаємо модалку
+});
+
+
+// Локальне сховище видалених картинок
+let removedImages = JSON.parse(localStorage.getItem("removedImages")) || [];
+const containers = document.querySelectorAll(".img-container");
+
+containers.forEach(container => {
+  const btn = container.querySelector(".remove");
+  const img = container.querySelector("img");
+  const src = img.getAttribute("src");
+
+  // Якщо ця картинка в списку видалених, то не показувати її
+  if (removedImages.includes(src)) {
+    container.style.display = "none";
+  }
+  // Обробник кліку на хрестик
+  btn.addEventListener("click", () => {
+    container.style.display = "none";
+    if (!removedImages.includes(src)) {
+      removedImages.push(src);
+      localStorage.setItem("removedImages", JSON.stringify(removedImages));
+    }
+  });
+});
+
+// Відновити всі картинки
+document.getElementById("restore").addEventListener("click", () => {
+  localStorage.removeItem("removedImages");
+  removedImages = [];
+  
+  containers.forEach(container => {
+    container.style.display = "inline-block";
+  });
 });
