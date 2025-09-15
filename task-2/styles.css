@@ -11,15 +11,14 @@ h1 {
     width: 80%;
     margin: 0 auto;
     display: flex;
-    justify-content: flex-end;
+    justify-content: flex-end; /* розміщення в правій частині сторінки */
     gap: 10px;
     align-items: center;
 }
 
 .gallery {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(3, auto);
+    grid-template-columns: repeat(4, 1fr); /* 4 колонки */
     gap: 15px;
     max-width: 80%;
     margin: 0 auto;
@@ -27,20 +26,22 @@ h1 {
 
 .gallery img {
     width: 100%;
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 4 / 3; /* фіксована висота картинки */
     border-radius: 50%;
-    object-fit: cover;
+    object-fit: cover; /* заповнення контейнера, зберігаючи пропорції картинки */
     border: solid rgb(76, 76, 76) 5px;
-    transition: 0.5s ease;
+    transition: 0.5s ease; /* плавний перехід */
     cursor: pointer;
 }
 
+/* Стилі для великих екранів */
 @media (min-width: 900px) {
     .gallery img:nth-child(4n+1) {
         border-color: red;
     }
 }
 
+/* Стилі для середніх екранів */
 @media (max-width: 900px) {
     .gallery {
         grid-template-columns: repeat(2, 1fr);
@@ -50,6 +51,7 @@ h1 {
     }
 }
 
+/* Стилі для менших екранів */
 @media (max-width: 500px) {
     .gallery {
         grid-template-columns: 1fr;
@@ -62,4 +64,42 @@ h1 {
 .gallery img:hover {
     border: solid yellow 5px;
     transform: rotate(45deg)
+}
+
+/* Модальне вікно */
+.modal {
+  display: none; /* спочатку приховане */
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.6); /* затемнення фону */
+}
+
+/* Картинка всередині модалки */
+.modal-content {
+  margin: 3% auto;
+  display: block;
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 8px;
+}
+
+/* Кнопка закриття картинки */
+.close {
+  position: absolute;
+  top: 3%;
+  right: 5%;
+  color: white;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.close:hover {
+  color: #ccc;
 }
