@@ -48,6 +48,7 @@ button {
 
 button:hover {
     opacity: 0.8;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 }
 
 button:active {
@@ -77,4 +78,22 @@ th, td {
 th {
     background: rgb(232, 232, 232);
     text-align: center;
+}
+
+.row-checkbox {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    accent-color: #50ff4d;
+    transition: 0.2s ease;
+}
+
+.row-checkbox:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+.row-checkbox:active {
+    transform: translateY(1px);
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
 }
